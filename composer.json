@@ -11,7 +11,7 @@
     "require": {
         "composer-plugin-api": "^1.1",
         "php": "^7.1",
-        "enderlab/psr15-middle-earth-framework": "dev-master"
+        "enderlab/middle-earth-framework": "dev-master"
     },
     "autoload": {
         "psr-4": {
