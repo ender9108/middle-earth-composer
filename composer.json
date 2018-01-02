@@ -20,7 +20,6 @@
     },
     "scripts": {
         "post-install-cmd": "EnderLab\\Installer\\Events::postInstall",
-        "post-update-cmd": "EnderLab\\Installer\\Events::postUpdate",
         "post-create-project-cmd": "EnderLab\\Installer\\Events::postCreateProject"
     }
 }
