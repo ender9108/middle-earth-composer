@@ -16,10 +16,12 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/"
+            "EnderLab\\MiddleEarthInstaller\\": "src/"
         }
     },
     "scripts": {
-        "post-install-cmd": "EnderLab\\Installer\\Events::postInstall",
-        "post-create-project-cmd": "EnderLab\\Installer\\Events::postCreateProject"
+        "post-install-cmd": "EnderLab\\MiddleEarthInstaller\\Composer::event",
+        "post-update-cmd": "EnderLab\\MiddleEarthInstaller\\Composer::event",
+        "post-create-project-cmd": "EnderLab\\MiddleEarthInstaller\\Composer::event"
     }
 }
