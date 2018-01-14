@@ -43,10 +43,12 @@ class Installer
     public function createDirectories(bool $verbose = true)
     {
         foreach ($this->config['directories'] as $directory) {
-            mkdir($this->rootPath . $directory);
+            if (!is_dir($this->rootPath . $directory)) {
+                mkdir($this->rootPath . $directory);
 
-            if (true === $verbose) {
-                $this->io->write('Create directory "' . $this->rootPath . $directory . '".');
+                if (true === $verbose) {
+                    $this->io->write('Create directory "' . $this->rootPath . $directory . '".');
+                }
             }
         }
     }
@@ -54,10 +56,12 @@ class Installer
     public function createConfigFiles(bool $verbose = true)
     {
         foreach ($this->config['template-file'] as $source => $dest) {
-            copy(__DIR__ . '/' . $source, $this->rootPath . $dest);
+            if (!is_file($this->rootPath . $dest)) {
+                copy(__DIR__ . '/' . $source, $this->rootPath . $dest);
 
-            if (true === $verbose) {
-                $this->io->write('Create file "' . $dest . '".');
+                if (true === $verbose) {
+                    $this->io->write('Create file "' . $dest . '".');
+                }
             }
         }
     }
