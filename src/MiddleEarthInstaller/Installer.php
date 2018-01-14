@@ -19,38 +19,45 @@ class Installer
      */
     private $composer;
 
-    private $directories = [
-        'app',
-        'config',
-        'public',
-        'public/js',
-        'public/css',
-        'tests',
-        'tmp',
-        'tmp/log',
-        'tmp/cache'
-    ];
+    private $config;
+
+    private $rootPath;
 
     public static function event(Event $event)
     {
+        $event->getIO()->write('<info>'.$event->getName().' - Configuration MiddleEarth !!</info>');
         $installer = new self($event->getIO(), $event->getComposer());
 
-        $event->getIO()->write('<info>'.$event->getName().' - Configuration MiddleEarth !!</info>');
+        $installer->createDirectories();
+        $installer->createConfigFiles();
     }
 
     public function __construct(IOInterface $io, Composer $composer)
     {
         $this->io = $io;
         $this->composer = $composer;
+        $this->rootPath = realpath(Factory::getComposerFile());
+        $this->config = include(__DIR__.'/config/config.php');
     }
 
     public function createDirectories(bool $verbose = true)
     {
-        foreach (self::$directories as $directory) {
-            mkdir($rootDir . $directory);
+        foreach ($this->config['directories'] as $directory) {
+            mkdir($this->rootPath . $directory);
 
             if (true === $verbose) {
-                $io->write('Create directory "' . $rootDir . $directory . '".');
+                $this->io->write('Create directory "' . $this->rootPath . $directory . '".');
+            }
+        }
+    }
+
+    public function createConfigFiles(bool $verbose = true)
+    {
+        foreach ($this->config['template-file'] as $source => $dest) {
+            copy(__DIR__ . '/' . $source, $this->rootPath . $dest);
+
+            if (true === $verbose) {
+                $this->io->write('Create file "' . $dest . '".');
             }
         }
     }
