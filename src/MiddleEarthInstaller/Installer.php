@@ -7,7 +7,7 @@ use Composer\IO\IOInterface;
 use Composer\Script\Event;
 
 
-class Composer
+class Installer
 {
     /**
      * @var IOInterface

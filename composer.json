@@ -27,8 +27,8 @@
         }
     },
     "scripts": {
-        "post-install-cmd": "EnderLab\\MiddleEarthInstaller\\Composer::event",
-        "post-update-cmd": "EnderLab\\MiddleEarthInstaller\\Composer::event",
-        "post-create-project-cmd": "EnderLab\\MiddleEarthInstaller\\Composer::event"
+        "post-install-cmd": "EnderLab\\MiddleEarthInstaller\\Installer::event",
+        "post-update-cmd": "EnderLab\\MiddleEarthInstaller\\Installer::event",
+        "post-create-project-cmd": "EnderLab\\MiddleEarthInstaller\\Installer::event"
     }
 }
