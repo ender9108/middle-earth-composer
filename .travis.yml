@@ -10,6 +10,3 @@ install:
 script:
   - ./vendor/bin/phpcbf
   - ./vendor/bin/php-cs-fixer fix
-
-after_success:
-  - travis_retry php vendor/bin/php-coveralls
