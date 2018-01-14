@@ -19,15 +19,40 @@ class Installer
      */
     private $composer;
 
+    private $directories = [
+        'app',
+        'config',
+        'public',
+        'public/js',
+        'public/css',
+        'tests',
+        'tmp',
+        'tmp/log',
+        'tmp/cache'
+    ];
+
+    public static function event(Event $event)
+    {
+        $installer = new self($event->getIO(), $event->getComposer());
+
+        $event->getIO()->write('<info>Configuration MiddleEarth !!</info>');
+        $installer->createDirectories();
+    }
+
     public function __construct(IOInterface $io, Composer $composer)
     {
         $this->io = $io;
         $this->composer = $composer;
     }
 
-    public static function event(Event $event)
+    public function createDirectories(bool $verbose = true)
     {
-        $installer = new self($event->getIO(), $event->getComposer());
-        $installer->io->write('<info>Configuration MiddleEarth !!</info>');
+        foreach (self::$directories as $directory) {
+            mkdir($rootDir . $directory);
+
+            if (true === $verbose) {
+                $io->write('Create directory "' . $rootDir . $directory . '".');
+            }
+        }
     }
 }
