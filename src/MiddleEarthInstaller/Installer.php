@@ -1,11 +1,11 @@
 <?php
+
 namespace EnderLab\MiddleEarthInstaller;
 
 use Composer\Composer;
 use Composer\Factory;
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
-
 
 class Installer
 {
@@ -25,7 +25,7 @@ class Installer
 
     public static function event(Event $event)
     {
-        $event->getIO()->write('<info>'.$event->getName().' - Configuration MiddleEarth !!</info>');
+        $event->getIO()->write('<info>' . $event->getName() . ' - Configuration MiddleEarth !!</info>');
         $installer = new self($event->getIO(), $event->getComposer());
 
         $installer->createDirectories();
@@ -37,7 +37,7 @@ class Installer
         $this->io = $io;
         $this->composer = $composer;
         $this->rootPath = realpath(Factory::getComposerFile());
-        $this->config = include(__DIR__.'/config/config.php');
+        $this->config = include __DIR__ . '/config/config.php';
     }
 
     public function createDirectories(bool $verbose = true)

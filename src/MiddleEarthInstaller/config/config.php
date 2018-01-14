@@ -1,4 +1,5 @@
 <?php
+
 return [
     'directories' => [
         'app',

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ruleset name="Enderlab">
+    <description></description>
+    <arg name="colors"/>
+    <arg value="p"/>
+    <file>src</file>
+    <!-- <file>tests</file> -->
+    <!-- <file>app</file> -->
+    <rule ref="PSR2"></rule>
+</ruleset>
