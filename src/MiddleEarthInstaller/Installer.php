@@ -35,8 +35,7 @@ class Installer
     {
         $installer = new self($event->getIO(), $event->getComposer());
 
-        $event->getIO()->write('<info>Configuration MiddleEarth !!</info>');
-        $installer->createDirectories();
+        $event->getIO()->write('<info>'.$event->getName().' - Configuration MiddleEarth !!</info>');
     }
 
     public function __construct(IOInterface $io, Composer $composer)
