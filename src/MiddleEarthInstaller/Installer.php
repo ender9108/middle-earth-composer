@@ -36,7 +36,7 @@ class Installer
     {
         $this->io = $io;
         $this->composer = $composer;
-        $this->rootPath = realpath(Factory::getComposerFile());
+        $this->rootPath = rtrim(realpath(dirname(Factory::getComposerFile())), '/').'/';
         $this->config = include __DIR__ . '/config/config.php';
     }
 
