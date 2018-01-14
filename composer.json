@@ -27,6 +27,7 @@
         }
     },
     "scripts": {
-        "post-create-project-cmd": "EnderLab\\MiddleEarthInstaller\\Installer::event"
+        "pre-install-cmd": "EnderLab\\MiddleEarthInstaller\\Installer::event",
+        "pre-update-cmd": "EnderLab\\MiddleEarthInstaller\\Installer::event"
     }
 }
