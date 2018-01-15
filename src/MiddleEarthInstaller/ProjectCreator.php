@@ -135,12 +135,12 @@ class ProjectCreator
     {
         $query = [
             sprintf(
-                "\n  <question>%s</question>\n",
+                "\n<question>%s</question>\n",
                 'Would you like install exemple?'
             ),
-            "  [<comment>y</comment>] Yes\n",
-            "  [<comment>n</comment>] No\n",
-            '  Make your selection <comment>(n)</comment>: ',
+            "\t[<comment>y</comment>] Yes\n",
+            "\t[<comment>n</comment>] No\n",
+            "\t".'Make your selection <comment>(n)</comment>: ',
         ];
 
         while (true) {
@@ -149,6 +149,7 @@ class ProjectCreator
             switch (true) {
                 case ($answer === 'y'):
                     $this->copyExemple();
+                    $this->io->write("\n\t".'- [<info>OK</info>] Creation exemple.');
                     return;
                     break;
                 case ($answer === 'n'):
