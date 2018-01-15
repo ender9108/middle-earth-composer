@@ -1,6 +1,6 @@
 <?php
 
-namespace EnderLab\MiddleEarth\Installer;
+namespace EnderLab\MiddleEarthInstaller;
 
 use Composer\Composer;
 use Composer\Factory;
