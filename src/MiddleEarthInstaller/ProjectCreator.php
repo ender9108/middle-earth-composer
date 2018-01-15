@@ -35,12 +35,12 @@ class ProjectCreator
     public static function createProject(Event $event)
     {
         $installer = new self($event->getIO(), $event->getComposer());
-        $event->getIO()->write('<info>' . $installer->getConfig()['logo'] . '</info>');
+        $event->getIO()->write('<info>' . $installer->getConfig()['logo'] . '</info>'."\n");
 
-        $event->getIO()->write('Creation directory tree');
+        $event->getIO()->write("\n".'<comment>Creation directory tree</comment>'."\n");
         $installer->createDirectories();
 
-        $event->getIO()->write('Creation configuration files');
+        $event->getIO()->write("\n".'<comment>Creation configuration files</comment>'."\n");
         $installer->createConfigFiles();
     }
 
@@ -48,11 +48,11 @@ class ProjectCreator
     {
         $installer = new self($event->getIO(), $event->getComposer());
 
-        $event->getIO()->write('Clean JSON définitions');
+        $event->getIO()->write("\n".'<comment>Clean JSON définitions</comment>'."\n");
 
         $installer->cleanJsonDefinitions();
 
-        $event->getIO()->write('Clean Directories');
+        $event->getIO()->write("\n".'<comment>Clean Directories</comment>'."\n");
 
         $installer->cleanDirectories();
     }
@@ -133,6 +133,8 @@ class ProjectCreator
 
         rmdir($directory);
         rmdir($srcDir);
+
+        $this->io->write("\t".'- [<info>OK</info>] Remove "<info>src/</info>".');
     }
 
     public function getConfig()
