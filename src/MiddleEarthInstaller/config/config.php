@@ -19,6 +19,7 @@ return [
         'app',
         'app/Actions',
         'app/Templates',
+        'app/Templates/error',
         'config',
         'public',
         'public/js',
