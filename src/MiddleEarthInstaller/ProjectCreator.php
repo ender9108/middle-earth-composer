@@ -37,10 +37,10 @@ class ProjectCreator
         $installer = new self($event->getIO(), $event->getComposer());
         $event->getIO()->write('<info>' . $installer->getConfig()['logo'] . '</info>'."\n");
 
-        $event->getIO()->write("\n".'<comment>Creation directory tree</comment>'."\n");
+        $event->getIO()->write("\n".'<question>Creation directory tree</question>'."\n");
         $installer->createDirectories();
 
-        $event->getIO()->write("\n".'<comment>Creation configuration files</comment>'."\n");
+        $event->getIO()->write("\n".'<question>Creation configuration files</question>'."\n");
         $installer->createConfigFiles();
     }
 
@@ -48,11 +48,11 @@ class ProjectCreator
     {
         $installer = new self($event->getIO(), $event->getComposer());
 
-        $event->getIO()->write("\n".'<comment>Clean JSON définitions</comment>'."\n");
+        $event->getIO()->write("\n".'<question>Clean JSON définitions</question>'."\n");
 
         $installer->cleanJsonDefinitions();
 
-        $event->getIO()->write("\n".'<comment>Clean Directories</comment>'."\n");
+        $event->getIO()->write("\n".'<question>Clean Directories</question>'."\n");
 
         $installer->cleanDirectories();
     }
