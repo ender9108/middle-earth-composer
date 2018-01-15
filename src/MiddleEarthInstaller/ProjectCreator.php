@@ -149,8 +149,10 @@ class ProjectCreator
             switch (true) {
                 case ($answer === 'y'):
                     $this->copyExemple();
+                    return;
                     break;
                 case ($answer === 'n'):
+                    return;
                     break;
                 default:
                     $this->io->write('<error>Invalid answer</error>');
