@@ -1,5 +1,4 @@
 <?php
-
 use EnderLab\MiddleEarth\Application\App;
 
 return [

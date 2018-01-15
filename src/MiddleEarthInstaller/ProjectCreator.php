@@ -150,7 +150,6 @@ class ProjectCreator
                 case ($answer === 'y'):
                 case ($answer === 'Y'):
                     $this->copyExemple();
-                    $this->io->write("\n\t".'- [<info>OK</info>] Creation exemple.');
                     return;
                     break;
                 case ($answer === 'n'):
@@ -202,13 +201,43 @@ class ProjectCreator
     {
         foreach ($this->config['exemple']['files'] as $source => $dest) {
             if (!is_file($this->rootPath . $dest)) {
-                copy(__DIR__ . '/' . $source, $this->rootPath . $dest);
-                /*if (true == copy(__DIR__ . '/' . $source, $this->rootPath . $dest)) {
+                if (true == copy(__DIR__ . '/' . $source, $this->rootPath . $dest)) {
                     $this->io->write("\t".'- [<info>OK</info>] Create file "<info>' . $dest . '</info>".');
                 } else {
                     $this->io->write("\t".'- [<error>ERR</error>] Cannot create file "<error>' . $dest . '</error>".');
-                }*/
+                }
             }
         }
+
+        $this->mergeOptions(
+            $this->rootPath.'config/router.php',
+            'router.routes',
+            $this->config['exemple']['router.config']
+        );
+    }
+
+    /**
+     * @param string $file
+     * @param string $key
+     * @param mixed $value
+     * @return bool
+     */
+    private function mergeOptions(string $file, string $key, $value): bool
+    {
+        if (false === file_exists($file)) {
+            return false;
+        }
+
+        $config = include($file);
+
+        if (false === isset($config[$key])) {
+            return false;
+        }
+
+        $config[$key] = $value;
+
+        file_put_contents($file, '<?php'."\n".'return ['."\n".var_export($config, true)."\n".'];'."\n");
+
+        return true;
     }
 }
