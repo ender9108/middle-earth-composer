@@ -238,7 +238,7 @@ class ProjectCreator
 
         $config[$key] = $value;
 
-        file_put_contents($file, '<?php'."\n".'return ['."\n".var_export($config, true)."\n".'];'."\n");
+        file_put_contents($file, '<?php'."\n".'return '."\n".var_export($config, true)."\n".';'."\n");
 
         $this->io->write("\t".'[<info>OK</info>] Config updated with success.');
 

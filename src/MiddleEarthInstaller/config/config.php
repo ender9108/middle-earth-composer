@@ -25,7 +25,6 @@ return [
         'public/js',
         'public/css',
         'tmp',
-        'tmp/log',
         'tmp/cache'
     ],
     'clean' => [
