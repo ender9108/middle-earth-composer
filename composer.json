@@ -18,8 +18,8 @@
         }
     },
     "scripts": {
-        "pre-install-cmd": "EnderLab\\MiddleEarth\\Installer\\Installer::createProject",
-        "pre-update-cmd": "EnderLab\\MiddleEarth\\Installer\\Installer::createProject",
-        "post-create-project-cmd": "EnderLab\\MiddleEarth\\Installer\\Installer::postCreateProject"
+        "pre-install-cmd": "EnderLab\\MiddleEarth\\Installer\\ProjectCreator::createProject",
+        "pre-update-cmd": "EnderLab\\MiddleEarth\\Installer\\ProjectCreator::createProject",
+        "post-create-project-cmd": "EnderLab\\MiddleEarth\\Installer\\ProjectCreator::postCreateProject"
     }
 }
