@@ -46,8 +46,8 @@ class ProjectCreator
 
     public static function createProject(Event $event)
     {
-        $event->getIO()->write('<info>' . self::$logo . '</info>');
         $installer = new self($event->getIO(), $event->getComposer());
+        $event->getIO()->write('<info>' . $installer->getConfig()['logo'] . '</info>');
 
         $event->getIO()->write('Creation directory tree');
         $installer->createDirectories();
@@ -93,5 +93,10 @@ class ProjectCreator
                 }
             }
         }
+    }
+
+    public function getConfig()
+    {
+        return $this->config;
     }
 }
