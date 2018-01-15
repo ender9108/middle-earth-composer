@@ -119,8 +119,8 @@ class ProjectCreator
             return;
         }
 
-        $rdi = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
-        $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST);
+        $rdi = new \RecursiveDirectoryIterator($directory, \FilesystemIterator::SKIP_DOTS);
+        $rii = new \RecursiveIteratorIterator($rdi, \RecursiveIteratorIterator::CHILD_FIRST);
 
         foreach ($rii as $filename => $fileInfo) {
             if ($fileInfo->isDir()) {
