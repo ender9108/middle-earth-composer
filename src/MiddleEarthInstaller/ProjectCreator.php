@@ -24,6 +24,10 @@ class ProjectCreator
 
     private $rootPath;
 
+    private $composerJsonPath;
+
+    private $composerJson;
+
     /**
      * @todo package installer dans framework uniquement pour l'ajout d'un nouveau package
      * @todo voir pour poser des questions
@@ -43,14 +47,19 @@ class ProjectCreator
     public static function postCreateProject(Event $event)
     {
         $installer = new self($event->getIO(), $event->getComposer());
-        file_put_contents(rtrim(realpath(dirname(Factory::getComposerFile())), '/').'/composer.log', print_r($installer->getJsonDefinition(), true));
+
+        $event->getIO()->write('Clean JSON définitions');
+
+        $installer->cleanJsonDéfinitions();
     }
 
     public function __construct(IOInterface $io, Composer $composer)
     {
         $this->io = $io;
         $this->composer = $composer;
-        $this->rootPath = rtrim(realpath(dirname(Factory::getComposerFile())), '/').'/';
+        $this->composerJsonPath = Factory::getComposerFile();
+        $this->composerJson = new JsonFile($this->composerJsonPath);
+        $this->rootPath = rtrim(realpath(dirname($this->composerJson)), '/').'/';
         $this->config = include __DIR__ . '/config/config.php';
     }
 
@@ -80,10 +89,22 @@ class ProjectCreator
         }
     }
 
-    public function getJsonDefinition()
+    public function cleanJsonDéfinitions()
     {
-        $json = new JsonFile(Factory::getComposerFile());
-        return $json->read();
+        $options = $this->composerJson->read();
+
+        unset($options['authors']);
+
+        $this->io->write("\t".'- [<info>OK</info>] Removal of unusual options.');
+
+        $options['scripts'] = [
+            "post-install-cmd" => "EnderLab\\MiddleEarth\\PackageManager\\ComposerEventManager::event",
+            "post-update-cmd" => "EnderLab\\MiddleEarth\\PackageManager\\ComposerEventManager::event"
+        ];
+
+        $this->io->write("\t".'- [<info>OK</info>] Adding scripts for auto-configuration packages.');
+
+        $this->composerJson->write($options);
     }
 
     public function getConfig()

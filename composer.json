@@ -1,6 +1,7 @@
 {
     "name": "enderlab/middle-earth-skeleton",
-    "type": "library",
+    "type": "project",
+    "homepage": "https://github.com/ender9108/middle-earth-skeleton",
     "license": "MIT",
     "authors": [
         {
