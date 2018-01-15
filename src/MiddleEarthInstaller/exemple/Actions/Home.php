@@ -1,7 +1,7 @@
 <?php
 namespace App\Actions;
 
-use EnderLab\Middleware\BaseMiddleware;
+use EnderLab\MiddleEarth\Middleware\BaseMiddleware;
 use GuzzleHttp\Psr7\Response;
 use Interop\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
