@@ -52,10 +52,10 @@ class ProjectCreator
         $event->getIO()->write("\n".'<question>Creation directory tree</question>'."\n");
         $installer->createDirectories();
 
-        $installer->askAddExempleQuestion();
-
         $event->getIO()->write("\n".'<question>Creation configuration files</question>'."\n");
         $installer->createConfigFiles();
+
+        $installer->askAddExempleQuestion();
     }
 
     public static function postCreateProject(Event $event)
@@ -92,9 +92,9 @@ class ProjectCreator
         foreach ($this->config['directories'] as $directory) {
             if (!is_dir($this->rootPath . $directory)) {
                 if (true == mkdir($this->rootPath . $directory)) {
-                    $this->io->write("\t".'- [<info>OK</info>] Create directory "<info>' . $directory . '</info>".');
+                    $this->io->write("\t".'[<info>OK</info>] Create directory "<info>' . $directory . '</info>".');
                 } else {
-                    $this->io->write("\t".'- [<error>ERR</error>] Cannot create directory "<error>' . $directory . '</error>".');
+                    $this->io->write("\t".'[<error>ERR</error>] Cannot create directory "<error>' . $directory . '</error>".');
                 }
             }
         }
@@ -105,9 +105,9 @@ class ProjectCreator
         foreach ($this->config['template-file'] as $source => $dest) {
             if (!is_file($this->rootPath . $dest)) {
                 if (true == copy(__DIR__ . '/' . $source, $this->rootPath . $dest)) {
-                    $this->io->write("\t".'- [<info>OK</info>] Create file "<info>' . $dest . '</info>".');
+                    $this->io->write("\t".'[<info>OK</info>] Create file "<info>' . $dest . '</info>".');
                 } else {
-                    $this->io->write("\t".'- [<error>ERR</error>] Cannot create file "<error>' . $dest . '</error>".');
+                    $this->io->write("\t".'[<error>ERR</error>] Cannot create file "<error>' . $dest . '</error>".');
                 }
             }
         }
@@ -135,7 +135,7 @@ class ProjectCreator
     {
         $query = [
             sprintf(
-                "\n<question>%s</question>\n",
+                "\n\n<question>%s</question>\n",
                 'Would you like install exemple?'
             ),
             "\t[<comment>y</comment>] Yes\n",
@@ -202,9 +202,9 @@ class ProjectCreator
         foreach ($this->config['exemple']['files'] as $source => $dest) {
             if (!is_file($this->rootPath . $dest)) {
                 if (true == copy(__DIR__ . '/' . $source, $this->rootPath . $dest)) {
-                    $this->io->write("\t".'- [<info>OK</info>] Create file "<info>' . $dest . '</info>".');
+                    $this->io->write("\t".'[<info>OK</info>] Create file "<info>' . $dest . '</info>".');
                 } else {
-                    $this->io->write("\t".'- [<error>ERR</error>] Cannot create file "<error>' . $dest . '</error>".');
+                    $this->io->write("\t".'[<error>ERR</error>] Cannot create file "<error>' . $dest . '</error>".');
                 }
             }
         }
@@ -225,18 +225,22 @@ class ProjectCreator
     private function mergeOptions(string $file, string $key, $value): bool
     {
         if (false === file_exists($file)) {
+            $this->io->write("\t".'[<error>ERR</error>] Update config - file "'.$file.'" does not exists.');
             return false;
         }
 
         $config = include($file);
 
         if (false === isset($config[$key])) {
+            $this->io->write("\t".'[<error>ERR</error>] Update config - config key "'.$key.'" does not exists.');
             return false;
         }
 
         $config[$key] = $value;
 
         file_put_contents($file, '<?php'."\n".'return ['."\n".var_export($config, true)."\n".'];'."\n");
+
+        $this->io->write("\t".'[<info>OK</info>] Config updated with success.');
 
         return true;
     }
