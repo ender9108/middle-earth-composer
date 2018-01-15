@@ -5,6 +5,7 @@ namespace EnderLab\MiddleEarthInstaller;
 use Composer\Composer;
 use Composer\Factory;
 use Composer\IO\IOInterface;
+use Composer\Json\JsonFile;
 use Composer\Script\Event;
 
 class ProjectCreator
