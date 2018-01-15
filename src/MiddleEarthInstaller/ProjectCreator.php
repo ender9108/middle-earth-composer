@@ -20,12 +20,24 @@ class ProjectCreator
      */
     private $composer;
 
+    /**
+     * @var array
+     */
     private $config;
 
+    /**
+     * @var string
+     */
     private $rootPath;
 
+    /**
+     * @var string
+     */
     private $composerJsonPath;
 
+    /**
+     * @var JsonFile
+     */
     private $composerJson;
 
     /**

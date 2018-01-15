@@ -35,5 +35,10 @@ return [
         'template/config.php' => 'config/config.php',
         'template/index.php'  => 'public/index.php',
         'template/router.php' => 'config/router.php'
+    ],
+    'exemple' => [
+        'router.config' => [
+            ['/', Home::class, 'GET', 'route.home']
+        ]
     ]
 ];

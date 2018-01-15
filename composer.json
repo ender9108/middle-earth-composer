@@ -11,8 +11,7 @@
     ],
     "require": {
         "php": "^7.1",
-        "enderlab/middle-earth-framework": "dev-master",
-        "http-interop/http-middleware": "^0.5.0"
+        "enderlab/middle-earth-framework": "dev-master"
     },
     "require-dev": {
         "composer/composer": "^1.6",
