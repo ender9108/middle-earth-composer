@@ -59,7 +59,7 @@ class ProjectCreator
         $this->composer = $composer;
         $this->composerJsonPath = Factory::getComposerFile();
         $this->composerJson = new JsonFile($this->composerJsonPath);
-        $this->rootPath = rtrim(realpath(dirname($this->composerJson)), '/').'/';
+        $this->rootPath = rtrim(realpath(dirname($this->composerJsonPath)), '/').'/';
         $this->config = include __DIR__ . '/config/config.php';
     }
 
