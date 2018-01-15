@@ -55,6 +55,15 @@ class ProjectCreator
         $event->getIO()->write("\n".'<question>Clean Directories</question>'."\n");
 
         $installer->cleanDirectories();
+
+        $event->getIO()->write("\n".'<question>Congratulations your project is created !</question>'."\n");
+
+        $event->getIO()->write("\n".'- Run your application !'."\n");
+        $event->getIO()->write("\t".'1. Change to the project directory');
+        $event->getIO()->write("\t".'2. Execute the php -S 127.0.0.1:8080 -t ./public');
+        $event->getIO()->write("\t".'3. Browse to the http://localhost:8080/');
+
+        $event->getIO()->write("\n".'- Read the documentation at https://github.com/ender9108/middle-earth-framework/blob/master/docs/index.md'."\n");
     }
 
     public function __construct(IOInterface $io, Composer $composer)
