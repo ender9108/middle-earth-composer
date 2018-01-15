@@ -148,11 +148,13 @@ class ProjectCreator
 
             switch (true) {
                 case ($answer === 'y'):
+                case ($answer === 'Y'):
                     $this->copyExemple();
                     $this->io->write("\n\t".'- [<info>OK</info>] Creation exemple.');
                     return;
                     break;
                 case ($answer === 'n'):
+                case ($answer === 'N'):
                     return;
                     break;
                 default:
@@ -195,5 +197,15 @@ class ProjectCreator
 
     private function copyExemple()
     {
+        foreach ($this->config['exemple']['files'] as $source => $dest) {
+            if (!is_file($this->rootPath . $dest)) {
+                copy(__DIR__ . '/' . $source, $this->rootPath . $dest);
+                /*if (true == copy(__DIR__ . '/' . $source, $this->rootPath . $dest)) {
+                    $this->io->write("\t".'- [<info>OK</info>] Create file "<info>' . $dest . '</info>".');
+                } else {
+                    $this->io->write("\t".'- [<error>ERR</error>] Cannot create file "<error>' . $dest . '</error>".');
+                }*/
+            }
+        }
     }
 }
