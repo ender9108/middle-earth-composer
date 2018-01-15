@@ -52,7 +52,7 @@ class ProjectCreator
         $event->getIO()->write("\n".'<question>Creation directory tree</question>'."\n");
         $installer->createDirectories();
 
-        // @todo ask question install exemple
+        $installer->askAddExempleQuestion();
 
         $event->getIO()->write("\n".'<question>Creation configuration files</question>'."\n");
         $installer->createConfigFiles();
@@ -131,6 +131,34 @@ class ProjectCreator
         $this->composerJson->write($options);
     }
 
+    public function askAddExempleQuestion()
+    {
+        $query = [
+            sprintf(
+                "\n  <question>%s</question>\n",
+                'Would you like install exemple?'
+            ),
+            "  [<comment>y</comment>] Yes\n",
+            "  [<comment>n</comment>] No\n",
+            '  Make your selection <comment>(n)</comment>: ',
+        ];
+
+        while (true) {
+            $answer = $this->io->ask($query, 'n');
+
+            switch (true) {
+                case ($answer === 'y'):
+                    $this->copyExemple();
+                    break;
+                case ($answer === 'n'):
+                    break;
+                default:
+                    $this->io->write('<error>Invalid answer</error>');
+                    break;
+            }
+        }
+    }
+
     private function cleanDirectories()
     {
         $directory = dirname(__FILE__).'/';
@@ -160,5 +188,9 @@ class ProjectCreator
     public function getConfig()
     {
         return $this->config;
+    }
+
+    private function copyExemple()
+    {
     }
 }

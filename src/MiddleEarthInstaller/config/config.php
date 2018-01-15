@@ -39,6 +39,10 @@ return [
     'exemple' => [
         'router.config' => [
             ['/', Home::class, 'GET', 'route.home']
+        ],
+        'files' => [
+            'Exemple/Actions/Home.php' => 'app/Actions/Home.php',
+            'Exemple/Templates/home.php' => 'app/Templates/home.php'
         ]
     ]
 ];
