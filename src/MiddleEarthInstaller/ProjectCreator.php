@@ -50,7 +50,11 @@ class ProjectCreator
 
         $event->getIO()->write('Clean JSON définitions');
 
-        $installer->cleanJsonDéfinitions();
+        $installer->cleanJsonDefinitions();
+
+        $event->getIO()->write('Clean Directories');
+
+        $installer->cleanDirectories();
     }
 
     public function __construct(IOInterface $io, Composer $composer)
@@ -63,7 +67,7 @@ class ProjectCreator
         $this->config = include __DIR__ . '/config/config.php';
     }
 
-    public function createDirectories(bool $verbose = true)
+    public function createDirectories()
     {
         foreach ($this->config['directories'] as $directory) {
             if (!is_dir($this->rootPath . $directory)) {
@@ -76,7 +80,7 @@ class ProjectCreator
         }
     }
 
-    public function createConfigFiles(bool $verbose = true)
+    public function createConfigFiles()
     {
         foreach ($this->config['template-file'] as $source => $dest) {
             if (!is_file($this->rootPath . $dest)) {
@@ -89,7 +93,7 @@ class ProjectCreator
         }
     }
 
-    public function cleanJsonDéfinitions()
+    public function cleanJsonDefinitions()
     {
         $options = $this->composerJson->read();
 
@@ -105,6 +109,28 @@ class ProjectCreator
         $this->io->write("\t".'- [<info>OK</info>] Adding scripts for auto-configuration packages.');
 
         $this->composerJson->write($options);
+    }
+
+    private function cleanDirectories()
+    {
+        $directory = dirname(__FILE__).'/';
+
+        if (! is_dir($directory)) {
+            return;
+        }
+
+        $rdi = new RecursiveDirectoryIterator($directory, FilesystemIterator::SKIP_DOTS);
+        $rii = new RecursiveIteratorIterator($rdi, RecursiveIteratorIterator::CHILD_FIRST);
+
+        foreach ($rii as $filename => $fileInfo) {
+            if ($fileInfo->isDir()) {
+                rmdir($filename);
+                continue;
+            }
+            unlink($filename);
+        }
+
+        rmdir($directory);
     }
 
     public function getConfig()
