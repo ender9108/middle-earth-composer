@@ -10,7 +10,8 @@
         }
     ],
     "require": {
-        "php": "^7.1"
+        "php": "^7.1",
+        "enderlab/middle-earth-framework": "dev-master"
     },
     "require-dev": {
         "composer/composer": "^1.6"
