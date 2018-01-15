@@ -156,7 +156,7 @@ class ProjectCreator
                     return;
                     break;
                 default:
-                    $this->io->write("\n\t".'<error>Invalid answer</error>'."\n");
+                    $this->io->write("\n\t".'[<error>ERR</error>] Invalid answer'."\n");
                     break;
             }
         }
