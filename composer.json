@@ -12,6 +12,9 @@
         "php": "^7.1",
         "enderlab/middle-earth-framework": "dev-master"
     },
+    "require-dev": {
+        "composer/composer": "^1.6"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "app/"
