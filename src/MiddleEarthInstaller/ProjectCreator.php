@@ -186,10 +186,10 @@ class ProjectCreator
         rmdir($directory);
         rmdir($srcDir);
 
-        $this->io->write("\t".'- [<info>OK</info>] Remove "<info>src/</info>".');
+        $this->io->write("\t".'[<info>OK</info>] Remove "<info>src/</info>".');
 
         file_put_contents($this->rootPath.'.gitignore', "/vendor/\ncomposer.lock");
-        $this->io->write("\t".'- [<info>OK</info>] Update "<info>.gitignore</info>".');
+        $this->io->write("\t".'[<info>OK</info>] Update "<info>.gitignore</info>".');
     }
 
     public function getConfig()
