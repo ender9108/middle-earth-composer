@@ -114,6 +114,7 @@ class ProjectCreator
     private function cleanDirectories()
     {
         $directory = dirname(__FILE__).'/';
+        $srcDir = $this->rootPath.'src/';
 
         if (! is_dir($directory)) {
             return;
@@ -131,6 +132,7 @@ class ProjectCreator
         }
 
         rmdir($directory);
+        rmdir($srcDir);
     }
 
     public function getConfig()
