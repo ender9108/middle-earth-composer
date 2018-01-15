@@ -41,7 +41,7 @@ class ProjectCreator
 
     public static function postCreateProject(Event $event)
     {
-        // @todo clean directories
+        $installer = new self($event->getIO(), $event->getComposer());
     }
 
     public function __construct(IOInterface $io, Composer $composer)
@@ -76,6 +76,12 @@ class ProjectCreator
                 }
             }
         }
+    }
+
+    public function getJsonDefinition()
+    {
+        $json = new JsonFile(Factory::getComposerFile());
+        return $json->read();
     }
 
     public function getConfig()
