@@ -135,12 +135,12 @@ class ProjectCreator
     {
         $query = [
             sprintf(
-                "\n\n<question>%s</question>\n",
+                "\n<question>%s</question>\n",
                 'Would you like install exemple?'
             ),
             "\t[<comment>y</comment>] Yes\n",
             "\t[<comment>n</comment>] No\n",
-            "\t".'Make your selection <comment>(n)</comment>: ',
+            "\n\t".'Make your selection <comment>(n)</comment>: ',
         ];
 
         while (true) {
