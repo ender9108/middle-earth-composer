@@ -42,7 +42,7 @@ class ProjectCreator
     public static function postCreateProject(Event $event)
     {
         $installer = new self($event->getIO(), $event->getComposer());
-        file_put_contents('composer.log', print_r($installer->getConfig(), true));
+        file_put_contents(rtrim(realpath(dirname(Factory::getComposerFile())), '/').'/composer.log', print_r($installer->getConfig(), true));
     }
 
     public function __construct(IOInterface $io, Composer $composer)
