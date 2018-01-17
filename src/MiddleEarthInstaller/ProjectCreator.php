@@ -55,7 +55,7 @@ class ProjectCreator
         $event->getIO()->write("\n".'<question>Creation configuration files</question>'."\n");
         $installer->createConfigFiles();
 
-        $installer->askAddExempleQuestion();
+        //$installer->askAddExempleQuestion();
     }
 
     public static function postCreateProject(Event $event)
